@@ -1,0 +1,268 @@
+/* =============================
+   NAVBAR (siempre posición relativa, fondo estático)
+   ============================= */
+   /* NAVBAR sticky */
+nav.navbar{
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;                   /* << imprescindible */
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  /* tu fondo + puntitos */
+  background-color: #ff6b9d;
+  background-image:
+    radial-gradient(circle 2px at 20% 20%, rgba(255,255,255,0.7) 0%, transparent 75%),
+    radial-gradient(circle 2px at 60% 60%, rgba(255,255,255,0.5) 0%, transparent 75%);
+  background-repeat: repeat, repeat;
+  background-size: 30px 30px, 30px 30px;
+
+  padding: 10px 20px;
+  /* NO pongas overflow en el padre; aquí mejor quitarlo */
+  overflow: visible;
+}
+
+/* capa de brillo (opcional) */
+nav.navbar::after{
+  content:"";
+  position:absolute; inset:0; pointer-events:none;
+  background-image:
+    radial-gradient(circle 2px at 20% 20%, rgba(255,255,200,0.8) 0%, transparent 75%),
+    radial-gradient(circle 2px at 60% 60%, rgba(255,255,150,0.6) 0%, transparent 75%);
+  background-repeat: repeat, repeat;
+  background-size: 30px 30px, 30px 30px;
+  opacity:0; animation: shineDots 3s ease-in-out infinite;
+}
+
+  /* =============================
+     MARCA (LOGO + NOMBRE)
+     ============================= */
+  .navbar-brand {
+    position: relative;  /* Para que quede en relieve sobre los brillitos */
+    display: flex;
+    align-items: center;
+  }
+
+  .navbar-logo {
+    width: 48px;
+    height: 51px;
+    margin-right: 8px;
+  }
+
+  .navbar-name {
+    color: white;                /* Neón amarillo */
+    text-shadow: 0 0 8px whitesmoke;
+    font-size: 1.6rem;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+  }
+
+  /* =============================
+     LISTA DE ENLACES
+     ============================= */
+  .navbar-list {
+    position: relative;  /* Para que quede en relieve sobre los brillitos */
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 20px;
+  }
+
+  .navbar-item {
+    position: relative;
+  }
+
+  /* =============================
+     ESTILO BÁSICO DE LOS LINKS
+     ============================= */
+  .navbar-link {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+    position: relative;
+    padding: 4px 8px;
+    transition: all 0.2s ease-in-out;
+  }
+
+  /* =============================
+     “BRILLO” AL HACER CLICK (2s)
+     ============================= */
+  .navbar-link.active {
+    box-shadow: 0 0 8px 2px white;
+    border-radius: 4px;
+  }
+
+.nav-link-like{
+  color: #fff !important;
+  text-decoration: none !important;
+  font-weight: bold   !important;
+  font-size: 1.1rem   !important;
+  position: relative  !important;
+  padding: 4px 8px  !important;
+  transition: all 0.2s ease-in-out  !important;
+}
+
+
+
+  /* keyframes para el pulso */
+  @keyframes shineDots {
+    0%, 100% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+
+
+  /* =============================
+     Indicador de ruta actual (zig-zag)
+     ============================= */
+ /* =============================
+   Indicador de ruta actual (zig-zag en blanco)
+   ============================= */
+.navbar-link.selected {
+  background-image: url("data:image/svg+xml,\
+    <svg xmlns='http://www.w3.org/2000/svg' width='100' height='4' viewBox='0 0 100 4'>\
+      <polyline points='0,2 2,0 4,4 6,0 8,4 10,0 12,4 14,0 16,4 18,0 20,4 22,0 24,4 26,0 28,4 30,0 32,4 34,0 36,4 38,0 40,4 42,0 44,4 46,0 48,4 50,0 52,4 54,0 56,4 58,0 60,4 62,0 64,4 66,0 68,4 70,0 72,4 74,0 76,4 78,0 80,4 82,0 84,4 86,0 88,4 90,0 92,4 94,0 96,4 98,0 100,2' \
+        fill='none' stroke='%23FFFFFF' stroke-width='1'/>\
+    </svg>");
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  padding-bottom: 8px;
+}
+
+/* =============================
+   HOVER: línea zig-zag en blanco
+   ============================= */
+.navbar-link::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background-image: url("data:image/svg+xml,\
+    <svg xmlns='http://www.w3.org/2000/svg' width='100' height='4' viewBox='0 0 100 4'>\
+      <polyline points='0,2 2,0 4,4 6,0 8,4 10,0 12,4 14,0 16,4 18,0 20,4 22,0 24,4 26,0 28,4 30,0 32,4 34,0 36,4 38,0 40,4 42,0 44,4 46,0 48,4 50,0 52,4 54,0 56,4 58,0 60,4 62,0 64,4 66,0 68,4 70,0 72,4 74,0 76,4 78,0 80,4 82,0 84,4 86,0 88,4 90,0 92,4 94,0 96,4 98,0 100,2' \
+        fill='none' stroke='%23FFFFFF' stroke-width='1'/>\
+    </svg>");
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.navbar-link:hover::after {
+  opacity: 1;
+}
+
+  /* =============================
+     BOTÓN SOL/LUNA (ahora: ◐/◑)
+     ============================= */
+  .theme-toggle-btn {
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #fff;
+    transition: transform 0.2s ease;
+  }
+
+  .theme-toggle-btn:hover {
+    transform: scale(1.1);
+  }
+
+  /* =============================
+     Modos para <body> (solo para fondo del Home, no del Navbar)
+     ============================= */
+  /* MODO OSCURO: el “rosa” que tenías antes pasa a ser fondo de <body> (Home) */
+  body.dark-mode {
+    background-color: #ffe4e1; /* Rosa suave */
+    color: #333;
+  }
+
+  /* MODO CLARO: fondo blanco */
+  body.light-mode {
+    background-color: #ffffff;
+    color: #333;
+  }
+
+  /* El navbar **no** cambia de color en ninguno de los modos */
+
+  /* =============================
+     MEDIA QUERIES
+     ============================= */
+
+  /* Tablets y pantallas medianas */
+  @media (max-width: 1024px) {
+    .navbar {
+      padding: 8px 16px;
+    }
+    .navbar-name {
+      font-size: 1.1rem;
+    }
+    .navbar-link {
+      font-size: 0.95rem;
+      padding: 3px 6px;
+    }
+    .navbar-list {
+      gap: 16px;
+    }
+  }
+
+  /* Móviles (pantallas pequeñas) */
+  @media (max-width: 768px) {
+    .navbar {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 8px 12px;
+    }
+    .navbar-brand {
+      margin-bottom: 8px;
+    }
+    /* Ajustamos logo y nombre */
+    .navbar-logo {
+      width: 32px;
+      margin-right: 6px;
+    }
+    .navbar-name {
+      font-size: 1rem;
+    }
+    /* Enlaces en columna o en dos filas */
+    .navbar-list {
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .navbar-link {
+      font-size: 0.9rem;
+      padding: 3px 6px;
+    }
+  }
+
+  /* Móviles muy pequeños (menos de 480px) */
+  @media (max-width: 480px) {
+    .navbar {
+      padding: 6px 10px;
+    }
+    .navbar-logo {
+      width: 28px;
+      margin-right: 4px;
+    }
+    .navbar-name {
+      font-size: 0.9rem;
+    }
+    .navbar-link {
+      font-size: 0.85rem;
+      padding: 2px 4px;
+    }
+    .theme-toggle-btn {
+      font-size: 1.25rem;
+    }
+  }

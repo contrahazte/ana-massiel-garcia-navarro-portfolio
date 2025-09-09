@@ -1,0 +1,1021 @@
+
+
+
+
+/* Keyframes */
+@keyframes fly {
+  0% { transform: translate(-50px, 0) rotate(0deg); opacity: 0; }
+  10% { opacity: 1; }
+  50% { transform: translate(120vw, -30vh) rotate(360deg); }
+  90% { opacity: 1; }
+  100% { transform: translate(130vw, -40vh) rotate(720deg); opacity: 0; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+@keyframes sparkle {
+  0% { box-shadow: 0 0 3px 1px rgba(255,255,0,0.8); }
+  50% { box-shadow: 0 0 12px 4px rgba(255,255,0,0.6); }
+  100% { box-shadow: 0 0 3px 1px rgba(255,255,0,0.8); }
+}
+
+/* Banner */
+.bannerSection {
+  width: 100%;
+  padding: 0.3rem 2rem;
+  background-color: #111;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #ECF0F1;
+}
+.seleccione{
+  text-align: center;
+  color: #9d9d9d;
+  font-size: 2.3rem;
+  margin-bottom: 3rem;
+}
+.bannerRow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.contactos:hover {
+  text-decoration: underline;
+  color: #9B59B6;
+}
+/* Nota tipográfica del portafolio */
+.portfolio-note {
+max-width: 860px;
+margin: 2rem auto 0;
+padding: 1rem 1.25rem;
+background: linear-gradient(90deg, rgba(123,46,46,0.06), rgba(123,46,46,0));
+border-left: 4px solid #7b2e2e;     /* caoba */
+border-radius: 10px;
+line-height: 1.7;
+}
+
+.portfolio-note__title {
+margin: 0;
+font-size: 1.15rem;
+letter-spacing: 0.4px;
+color: #7b2e2e;                    /* caoba */
+font-weight: 700;
+}
+
+.portfolio-note__text {
+margin: 0.5rem 0 0;
+color: #444;
+font-size: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+.portfolio-note { max-width: 95%; }
+.portfolio-note__text { font-size: 0.95rem; }
+}
+
+.logo { width: 40px; }
+.bannerTitle {
+  font-size: 2rem;
+  margin: 0;
+}
+.bannerText {
+  font-size: 1.125rem;
+  color: #BDC3C7;
+  text-align: center;
+  max-width: 800px;
+  margin-top: 0.5rem;
+}
+
+/* Sections */
+.section {
+  padding: 4rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  color: #fff;
+}
+.neonHeading {
+  color: #9B59B6;
+  text-shadow: 0 0 8px #9B59B6, 0 0 16px #9B59B6;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+.text {
+  font-size: 20px;
+  line-height: 2.2;
+  margin-bottom: 1rem;
+}
+
+/* Director */
+.directorSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem 2rem;
+  background-color: #111;
+}
+.flipContainer {
+  perspective: 1000px;
+  width: 300px;
+  height: 450px;
+  margin-bottom: 1.5rem;
+}
+.flipInner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 1s;
+}
+.flipFace {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border: 4px solid #9B59B6;
+  box-shadow: 0 0 12px rgba(155, 89, 182, 0.8);
+  border-radius: 8px;
+  overflow: hidden;
+  object-fit: cover;
+}
+.frontFace { transform: rotateY(0deg); }
+.backFace {
+  transform: rotateY(180deg);
+  background-color: #111;
+}
+.directorName {
+  color: #ECF0F1;
+  font-size: 1.75rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+.directorTitle {
+  color: #BDC3C7;
+  font-size: 1rem;
+  font-style: italic;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/* Packs */
+.packContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+.packCard {
+  position: relative;
+  background-color: #1A1A1A;
+  border: 2px solid #9B59B6;
+  border-radius: 8px;
+  padding: 1.5rem;
+  flex: 1 1 300px;
+  max-width: 350px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+.packLogo {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 40px;
+  opacity: 0.8;
+}
+.packTitle {
+  color: #ECF0F1;
+  font-size: 1.5rem;
+  text-align: center;
+  margin: 0.5rem 0;
+}
+.price {
+  color: #9B59B6;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.serviceList {
+  list-style: none;
+  padding: 0;
+  line-height: 1.4;
+}
+.serviceItem {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+.bullet {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background-color: #9B59B6;
+  border-radius: 50%;
+  margin-right: 0.75rem;
+}
+
+/* Mission + Gallery */
+.missionSection {
+  background-color: #FFF;
+  color: #333;
+  padding: 4rem 2rem;
+}
+.missionHeading {
+  font-size: 2rem;
+  color: #2C3E50;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.missionText {
+  font-size: 1.1rem;
+  color: #4A4A4A;
+  line-height: 1.6;
+  max-width: 850px;
+  margin: 0 auto 1.5rem;
+  text-align: center;
+}
+.galleryContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin: 5rem 0;
+}
+.galleryItem {
+  flex: 1 1 280px;
+  max-width: 280px;
+  height: 320px;
+  position: relative;
+  border: 1px solid #2980B9;
+  border-radius: 8px;
+  overflow: hidden;
+  box-sizing: border-box;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
+  transform: translateY(50px);
+  cursor: pointer;
+}
+.galleryItem.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.galleryItem.hovered {
+  transform: scale(1.05);
+  z-index: 10;
+}
+.galleryInner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
+}
+.galleryFront, .galleryBack {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  object-fit: cover;
+}
+.galleryBack {
+  transform: rotateY(180deg);
+  background-color: #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  color: #333;
+}
+.hoverOverlay {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 1.5rem;
+  color: #fff;
+}
+
+/* Reviews */
+.reviewsSection {
+  padding: 5rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  color: #fff;
+}
+.carouselContainer {
+  position: relative;
+  overflow: hidden;
+  margin-top: 2rem;
+}
+.carouselInner {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+.reviewCard {
+  background-color: #1A1A1A;
+  border: 2px solid #9B59B6;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 0 1rem;
+  flex: 0 0 calc(33.333% - 2rem);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+  min-width: 300px;
+}
+.reviewText {
+  font-style: italic;
+  color: #BDC3C7;
+  margin-bottom: 1rem;
+}
+.reviewAuthor {
+  color: #ECF0F1;
+  font-weight: bold;
+  text-align: right;
+}
+.carouselButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0,0,0,0.5);
+  border: none;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  font-size: 1.25rem;
+  cursor: pointer;
+  border-radius: 4px;
+  z-index: 1;
+}
+.prevButton { left: 0.5rem; }
+.nextButton { right: 0.5rem; }
+
+/* Magno */
+.magnoContainer {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 200px;
+  z-index: 1000;
+  text-align: center;
+}
+.sparkleImg {
+  width: 100%;
+  animation: sparkle 2s ease-in-out;
+  border-radius: 8px;
+}
+.dialog {
+  background-color: #FFF;
+  color: #000;
+  padding: 0.75rem 0.5rem;
+  border-radius: 12px;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.3;
+  text-align: left;
+  animation: sparkle 3s ease-in-out;
+}
+.catImg {
+  width: 100%;
+  border-radius: 8px;
+}
+.contactButton {
+  background-color: #9B59B6;
+  color: #FFF;
+  padding: 0.8rem 1.8rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  text-decoration: none;
+}
+/* ===== Grid uniforme ===== */
+.masonry{
+--tile: 220px;                /* tamaño base del tile */
+--gap: 1rem;
+
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(var(--tile), 1fr));
+gap: var(--gap);
+align-items: center;
+justify-items: center;
+
+max-width: 1200px;            /* centrado bonito opcional */
+margin-inline: auto;
+}
+
+/* Tarjeta cuadrada: todas iguales */
+.masonry__item{
+position: relative;
+width: 100%;
+aspect-ratio: 1 / 1;          /* misma altura para todos */
+overflow: hidden;
+border: 0;
+padding: 0;
+background: transparent;
+border-radius: 14px;
+cursor: pointer;
+display: block;
+}
+
+/* Imagen ocupa todo el tile */
+.masonry__img{
+display: block;
+width: 100%;
+height: 100%;
+object-fit: cover;             /* recorta para que queden iguales */
+object-position: center;
+transition: transform .35s ease, filter .35s ease;
+}
+
+/* Hover sutil */
+.masonry__item:hover .masonry__img{
+transform: scale(1.03);
+filter: drop-shadow(0 10px 20px rgba(0,0,0,.25));
+}
+
+/* Si quieres que el LOGO NO se recorte: usa "contain" sólo en ese ítem */
+.masonry__img[data-fit="contain"]{
+object-fit: contain;           /* sin recorte */
+background: radial-gradient(80% 80% at 50% 50%, rgba(255,255,255,.6), rgba(0,0,0,0) 70%);
+padding: 8%;                   /* “aire” para logos */
+}
+
+/* ===== Responsivo: ajusta tamaño del tile por breakpoint ===== */
+@media (min-width: 1400px){
+.masonry{ --tile: 260px; }
+}
+@media (max-width: 900px){
+.masonry{ --tile: 200px; }
+}
+@media (max-width: 600px){
+.masonry{ --tile: 160px; }
+}
+
+/* Overlay transparente (sin oscurecer el fondo) */
+.modal-overlay {
+position: fixed; inset: 0;
+background: transparent;        /* ⬅️ transparente como pediste */
+display: grid; place-items: center;
+z-index: 999;
+}
+
+/* Tarjeta del mensaje */
+.modal-card {
+position: relative;
+padding: 2rem 1.25rem;
+border-radius: 12px;
+/* un poco de contraste para que el texto se lea */
+background: #ff99cc;
+color: #fff;
+max-width: min(80vw, 640px);
+box-shadow: 0 20px 60px rgba(0,0,0,.45);
+animation: popIn .24s ease-out both;
+}
+
+/* Texto del modal */
+.modal-text {
+margin: 0;
+font-size: clamp(1rem, 2.2vw, 1.25rem);
+line-height: 1.5;
+text-align: center;
+}
+
+/* Cerrar */
+.modal-close {
+position: absolute; top: -10px; right: -10px;
+width: 36px; height: 36px; border: 0; border-radius: 999px;
+background: rgba(0,0,0,.75); color: #fff; font-size: 22px; line-height: 36px;
+cursor: pointer; box-shadow: 0 6px 18px rgba(0,0,0,.35);
+}
+
+/* Animación */
+@keyframes popIn {
+from { opacity: 0; transform: translateY(8px) scale(.96); }
+to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+/* ===== Layout principal ===== */
+.splash-track{
+display:flex;
+align-items:center;
+justify-content:center;
+gap:clamp(1rem,2.5vw,2rem);
+flex-direction:row;
+flex-wrap:nowrap;
+container-type:inline-size;                 /* para container queries */
+}
+
+/* Cambia a columna justo antes de que no quepan 3 ítems */
+:root{
+--item-min:16rem;
+--gap-min:1rem;
+}
+@container (max-width: calc(3 * var(--item-min) + 2 * var(--gap-min))){
+.splash-track{ flex-direction:column; }
+}
+
+/* ===== Ítem ===== */
+.splash{
+position:relative;
+isolation:isolate;
+/* entrada sutil escalando y apareciendo */
+animation:intro .7s cubic-bezier(.2,.7,.2,1) both;
+animation-delay:var(--delay,0s);
+}
+.splash-img{
+width: clamp(var(--item-min), 28vw, 40rem);
+height: clamp(var(--item-min), 28vw, 40rem);
+object-fit: contain;
+transform-origin:center;
+filter: drop-shadow(0 10px 26px rgba(0,0,0,.45));
+transition: transform .5s cubic-bezier(.2,.8,.2,1),
+            filter .5s cubic-bezier(.2,.8,.2,1);
+/* flotado sutil continuo */
+animation: floaty var(--orbit,18s) ease-in-out infinite;
+}
+/* efecto “splat-pop” + realce */
+.splash:hover .splash-img{
+animation: splat .65s cubic-bezier(.2,.8,.2,1) 1,
+           floaty var(--orbit,18s) ease-in-out infinite .65s;
+transform: translateY(-6px) rotate(-1.2deg) scale(1.04);
+filter: drop-shadow(0 20px 40px rgba(255,105,180,.35));
+}
+/* ondita/ripple suave al hover */
+.splash::after{
+content:"";
+position:absolute;
+inset:auto 0 8% 0;
+margin:auto;
+width:65%;
+height:18%;
+border-radius:50%;
+background: radial-gradient(50% 50% at 50% 50%, rgba(255,105,180,.25) 0%, rgba(255,105,180,0) 70%);
+opacity:0;
+transform: scale(.7);
+pointer-events:none;
+}
+.splash:hover::after{
+animation: ripple .8s ease-out;
+}
+
+/* ===== Texto (ya NO editable) ===== */
+.splash figcaption{
+position:absolute; inset:0;
+display:flex; align-items:center; justify-content:center;
+pointer-events:none;
+}
+.splash-caption{
+pointer-events:none;                 /* no clic, no edición */
+user-select:none;
+margin:0; padding:.5rem 1rem;
+font-weight:800;
+font-size: clamp(1rem, 2.2vw, 1.6rem);
+line-height:1.2;
+color:#fff;
+opacity:.92;
+text-shadow:0 2px 8px rgba(0,0,0,.55);
+transform: translateY(4px);
+transition: transform .35s ease, opacity .35s ease, text-shadow .35s ease;
+}
+.splash:hover .splash-caption{
+transform: translateY(-6px) scale(1.02);
+opacity:1;
+text-shadow:
+  0 6px 18px rgba(255,105,180,.55),
+  0 0 26px rgba(255,20,147,.35);
+}
+
+/* ===== Animaciones ===== */
+@keyframes floaty{
+0%,100%{ transform: translateY(0) rotate(0deg) scale(1); }
+50%    { transform: translateY(-6px) rotate(.8deg) scale(1.005); }
+}
+@keyframes splat{
+0%   { transform: translateY(0) rotate(0) scale(1); }
+35%  { transform: translateY(-10px) rotate(-2deg) scale(1.08); }
+60%  { transform: translateY(2px) rotate(.6deg) scale(.98); }
+100% { transform: translateY(-6px) rotate(-1.2deg) scale(1.04); }
+}
+@keyframes ripple{
+0%   { opacity:.0; transform: scale(.7); }
+30%  { opacity:.5; transform: scale(1); }
+100% { opacity:0;  transform: scale(1.25); }
+}
+@keyframes intro{
+0%   { opacity:0; transform: translateY(12px) scale(.96); }
+100% { opacity:1; transform: translateY(0)    scale(1); }
+}
+
+/* ===== Reduce motion ===== */
+@media (prefers-reduced-motion: reduce){
+.splash-img{ animation:none; }
+.splash:hover .splash-img{ transform: scale(1.03); }
+}
+/* --- Grid: 3 columnas, SIN espacio vertical entre filas --- */
+.splash-grid{
+display: grid;
+grid-template-columns: repeat(3, minmax(0, 1fr));
+column-gap: var(--gap);   /* espacio solo horizontal */
+row-gap: 0;               /* sin espacio entre rows */
+align-items: center;
+justify-items: center;
+}
+
+/* --- Reducir altura de cada tarjeta manteniendo el ancho --- */
+/* ratio = width / height → 5/4 es más bajo que cuadrado */
+:root{
+--gap: clamp(1rem, 2.5vw, 2rem);
+--img-max: 34rem;
+--ratio: 5/4;             /* altura ≈ 80% del ancho */
+}
+
+.splash{
+width: 100%;
+max-width: var(--img-max);
+aspect-ratio: var(--ratio);   /* ↓ menos alto que 1/1 */
+position: relative;
+isolation: isolate;
+}
+
+/* La imagen llena la tarjeta */
+.splash-img{
+width: 100%;
+height: 100%;
+object-fit: contain;
+}
+
+/* --- Breakpoints: 3 → 2 → 1 columnas (manteniendo filas pegadas) --- */
+@media (max-width: 1100px){
+.splash-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+:root{ --ratio: 4/3; }  /* un pelín más baja (altura ≈ 75% del ancho) */
+}
+
+@media (max-width: 640px){
+.splash-grid{ grid-template-columns: 1fr; }
+/* si quieres más altura en móvil, cambia 4/3 → 1 */
+}
+/* Base: grid uniforme */
+.masonry{
+  --tile: 220px;             /* tamaño base del tile */
+  --gap: 1rem;
+  --ratio: 1;                /* logos: cuadrado (1/1) */
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--tile), 1fr));
+  gap: var(--gap);
+  align-items: center;
+  justify-items: center;
+  max-width: 1100px;
+  margin-inline: auto;
+}
+
+/* Tarjeta con ratio variable (controlado por --ratio) */
+.masonry__item{
+  position: relative;
+  width: 100%;
+  aspect-ratio: var(--ratio);
+  overflow: hidden;
+  border: 0;
+  padding: 0;
+  background: rgba(0,0,0,0.04); /* sutil, puedes quitarlo */
+  border-radius: 14px;
+  cursor: pointer;
+  display: block;
+}
+
+.masonry__img{
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;          /* por defecto, logos recortan un poco */
+  object-position: center;
+  transition: transform .35s ease, filter .35s ease;
+}
+.masonry__item:hover .masonry__img{
+  transform: scale(1.03);
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,.25));
+}
+
+/* VARIANTE PÓSTERS (vertical) */
+.masonry--posters{
+  --ratio: 3/4;               /* ancho:alto (vertical) */
+  --tile: 260px;              /* un poco más grandes por defecto */
+}
+
+/* Para pósters, evita recorte (se ve entero) */
+.masonry__img[data-fit="contain"]{
+  object-fit: contain;
+  background: none;           /* sin “brillo” */
+  padding: 0;
+}
+
+/* Responsivo */
+@media (min-width: 1400px){
+  .masonry{ --tile: 260px; }
+  .masonry--posters{ --tile: 300px; }
+}
+@media (max-width: 900px){
+  .masonry{ --tile: 200px; }
+  .masonry--posters{ --tile: 240px; }
+}
+@media (max-width: 600px){
+  .masonry{ --tile: 160px; }
+  .masonry--posters{ --tile: 200px; }
+}
+.site-footer{
+  margin-top: 6rem;
+  background: #0a0a0a;          /* fondo oscuro elegante */
+  color: #ddd;
+}
+
+.site-footer__divider{
+  height: 2px;
+  background: linear-gradient(90deg, #e02097, #b31d6f, #d84b75); /* acento */
+  opacity: .65;
+}
+
+.site-footer__inner{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem 2rem;
+  text-align: center;
+}
+
+.site-footer__copy{
+  margin: 0;
+  font-size: .95rem;
+  letter-spacing: .3px;
+  color: #cfcfcf;
+}
+
+.site-footer__copy span{
+  color: #fff;
+  font-weight: 700;
+}
+
+@media (max-width: 640px){
+  .site-footer__inner{ padding: 1.25rem; }
+  .site-footer__copy{ font-size: .9rem; }
+}
+/* fila principal */
+.heroRow{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap: clamp(.75rem, 2.5vw, 2rem);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: .5rem 1rem;
+}
+
+/* logos izquierdo/derecho con tamaño fluido */
+.heroLogo{ display:block; height:auto; }
+.heroLogo--left{  width: clamp(64px, 8vw, 101px); }
+.heroLogo--right{ width: clamp(56px, 6.5vw, 80px); }
+
+/* bloque central */
+.heroCopy{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  margin-left: clamp(0rem, 2vw, 2rem);
+}
+
+/* tipografías fluidas */
+.heroTitle{
+  margin: 0;
+  line-height: 1.15;
+  font-size: clamp(1.25rem, 3.6vw, 3rem);
+}
+.heroName{
+  margin: .15rem 0 0;
+  line-height: 1.1;
+  font-size: clamp(1.25rem, 3.6vw, 3rem);
+  font-weight: 800;
+}
+.heroSurname{
+  color: rgb(209 206 206);
+  font-style: italic;
+}
+
+/* ===== breakpoints ===== */
+
+/* tablet horizontal y menor: permite envolver si no cabe */
+@media (max-width: 1024px){
+  .heroRow{ flex-wrap: wrap; }
+}
+
+/* tablet vertical / móviles grandes: columna, todo centrado */
+@media (max-width: 768px){
+  .heroRow{
+    flex-direction: column;
+    gap: .5rem;
+  }
+  .heroCopy{ margin-left: 0; }
+}
+
+/* móviles pequeños: tipografía un poco menor; puedes ocultar el 2º logo si quieres */
+@media (max-width: 420px){
+  .heroTitle, .heroName{ font-size: clamp(1.1rem, 6vw, 1.6rem); }
+  /* opcional: oculta el logo derecho para ganar espacio
+  .heroLogo--right{ display:none; }
+  */
+}
+/* ===== Título de intro (h2) ===== */
+.portfolioIntroTitle{
+  margin: 2rem auto 1rem;
+  max-width: 1100px;
+  text-align: center;
+  font-weight: 800;
+  line-height: 1.15;
+  font-size: clamp(1.4rem, 3.2vw, 2.2rem);
+  letter-spacing: .2px;
+  color: #111;                      /* si va sobre fondo claro */
+  text-wrap: balance;
+  position: relative;
+}
+
+/* subrayado/realce degradado */
+.portfolioIntroTitle::after{
+  content:"";
+  display:block;
+  width: clamp(140px, 24vw, 300px);
+  height: 6px;
+  margin: .65rem auto 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #e02097, #b31d6f, #d84b75);
+  opacity: .95;
+}
+
+.portfolioIntroTitle--onDark{ color: #f2f2f2; }
+
+/* ===== Nota de derechos (h3) ===== */
+.rightsNote{
+  max-width: 960px;
+  margin: 1.25rem auto 0;
+  padding: .9rem 1.1rem;
+  text-align: center;
+  font-weight: 600;
+  font-style: italic;
+  line-height: 1.55;
+  font-size: clamp(.95rem, 1.35vw, 1.05rem);
+
+  /* por defecto pensada para fondo oscuro */
+  color: #e7e7e7;
+  background: linear-gradient(0deg, rgba(255,255,255,.08), rgba(255,255,255,0));
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.25);
+}
+
+.rightsNote--onLight{
+  color: #444;
+  background: linear-gradient(0deg, rgba(0,0,0,.03), rgba(0,0,0,0));
+  border-color: rgba(0,0,0,.08);
+  box-shadow: 0 8px 18px rgba(0,0,0,.08);
+}
+
+.rightsNote::before{
+  content: "© ";
+  font-weight: 800;
+  opacity: .9;
+  margin-right: .15rem;
+}
+
+/* ajustes finos móvil pequeño */
+@media (max-width: 420px){
+  .portfolioIntroTitle{ font-size: clamp(1.25rem, 5.6vw, 1.6rem); }
+  .rightsNote{ padding: .75rem .9rem; }
+}
+/* Contenedor base */
+.presentacion{
+  font-style: italic;
+  color: grey;
+  max-width: 900px;
+  margin: 1rem auto 0;
+  line-height: 1.9;
+  padding-inline: 1rem;
+}
+
+/* Título con subrayado animado */
+.presentacion__title{
+  margin: 2rem 0 1rem;
+  text-align: center;
+  font-size: clamp(1.8rem, 4.2vw, 3.2rem);
+  font-weight: 800;
+  font-style: italic;
+  color: #111;
+  line-height: 1.1;
+  position: relative;
+}
+.presentacion__title::after{
+  content:"";
+  display:block;
+  height: 6px;
+  width: 0; /* crece al revelarse */
+  margin: .6rem auto 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg,#e02097,#b31d6f,#d84b75);
+  transition: width .6s ease .15s;
+}
+
+/* Bloques (fondos alternos) */
+.presentacion__block{
+  margin: 0;
+  padding: 1.2rem 1.6rem;
+  border-radius: 10px;
+}
+.presentacion__block + .presentacion__block{ margin-top: .65rem; }
+
+.presentacion__block--dark{ background:#000; color:#e8e8e8; }
+.presentacion__block--darker{ background:#0c0c0c; color:#f0f0f0; }
+.presentacion__block--light{ background:#fff; color:#333; }
+
+/* ===== Animación on-scroll con stagger ===== */
+.reveal [data-reveal]{
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity .6s ease var(--d,0ms),
+    transform .6s ease var(--d,0ms);
+}
+.reveal--visible [data-reveal]{
+  opacity: 1;
+  transform: translateY(0);
+}
+/* subrayado del título cuando aparece */
+.reveal--visible .presentacion__title::after{
+  width: clamp(140px, 24vw, 300px);
+}
+
+/* Hover sutil en desktop para bloques claros/osc.
+   (opcional: quita si no quieres) */
+@media (hover:hover){
+  .presentacion__block--light:hover{ box-shadow: 0 10px 26px rgba(0,0,0,.12); }
+  .presentacion__block--dark:hover,
+  .presentacion__block--darker:hover{ box-shadow: 0 10px 26px rgba(0,0,0,.35); }
+}
+
+/* Responsive fino */
+@media (max-width: 480px){
+  .presentacion{ line-height: 1.8; }
+  .presentacion__block{ padding: 1rem 1.1rem; }
+}
+/* Brillo elegante del título */
+.title-glow{
+  position: relative;
+  transition: text-shadow .35s ease, color .35s ease;
+}
+.title-glow::after{
+  content:"";
+  display:block;
+  width: 0;
+  height: 6px;
+  margin: .6rem auto 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg,#e02097,#b31d6f,#d84b75);
+  transition: width .45s ease;
+}
+@media (hover:hover){
+  .title-glow:hover{ color:#111; text-shadow: 0 2px 16px rgba(219,39,119,.25); }
+  .title-glow:hover::after{ width: clamp(140px, 24vw, 300px); }
+}
+
+/* Tarjeta con lift + glow */
+.hover-card{
+  border-radius: 10px;
+  transition: transform .25s ease, box-shadow .35s ease, filter .35s ease;
+  will-change: transform;
+}
+@media (hover:hover){
+  .hover-card:hover{
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 12px 28px rgba(0,0,0,.35);
+    /* halo muy suave rosado */
+    filter: drop-shadow(0 0 14px rgba(224,32,151,.16));
+  }
+}
+/* Variante para fondo claro (menos sombra dura) */
+.hover-card--light:hover{
+  box-shadow: 0 10px 24px rgba(0,0,0,.14);
+  filter: drop-shadow(0 0 16px rgba(224,32,151,.12));
+}
+
+/* (Opcional) micro-temblor elegante: añade la clase "hover-jitter" además de hover-card */
+@keyframes jitter {
+  0%{ transform: translateY(0) rotate(0); }
+  30%{ transform: translateY(-1px) rotate(-.15deg); }
+  60%{ transform: translateY(1px) rotate(.15deg); }
+  100%{ transform: translateY(0) rotate(0); }
+}
+@media (hover:hover){
+  .hover-jitter:hover{
+    animation: jitter .22s ease-in-out 1;
+  }
+}
+
+/* Respeto a usuarios con reducción de movimiento */
+@media (prefers-reduced-motion: reduce){
+  .title-glow, .hover-card{ transition: none; }
+}
