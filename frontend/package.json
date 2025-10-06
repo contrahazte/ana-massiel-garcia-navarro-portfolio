@@ -9,6 +9,10 @@
     "lint": "eslint .",
     "preview": "vite preview"
   },
+
+  "engines": {
+    "node": "18.x"
+  },
   "dependencies": {
     "aos": "^2.3.4",
     "framer-motion": "^12.18.1",
