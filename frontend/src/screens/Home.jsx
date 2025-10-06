@@ -224,7 +224,7 @@ export default function Home() {
   const [hoverStates, setHoverStates] = useState([false, false, false, false]);
   const [flipStates, setFlipStates] = useState([false, false, false, false]);
   // persistir estado de "contacto" entre recargas
-const [showContact, setShowContact] = useState(() => localStorage.getItem('showContact') === 'true');
+  const [showContact, setShowContact] = useState(() => localStorage.getItem('showContact') === 'true');
   const [isMobile, setIsMobile] = useState(window.innerWidth < 800);
   const missionRef = useRef(null);
   const fotos = [Contrahazt_code, img2, img3];
@@ -238,7 +238,7 @@ const [showContact, setShowContact] = useState(() => localStorage.getItem('showC
   }, []);
   const frases = [
     "Se basó en la búsqueda del color neón que integrara elementos místicos sobre un fondo negro.",
-    "La profesionalidad y la disciplina lideraron esta idea creativa donde el contraste de los colores primarios,la creación de una mascota creativa y un concepto ambicioso destinado un rango de edad específica hicieron que destacara.",
+    "La profesionalidad y la disciplina lideraron esta idea creativa donde el contraste de los colores primarios,la creación de una mascota creativa y un concepto ambicioso destinado a un rango de edad específica hicieron que destacara.",
     "El objetivo clave era la reconfección de un logo que utilizaba estilos básicos y alcanzaramos trazos más artísticos e innovadores que mezclaran técnología y medio ambiente.",
     "El objetivo esencial de este reto fue el trabajo de la alineación y el contraste de distintos tonos de un mismo color para lograr visibilidad y expansión del mensaje de venta",
     "El objetivo de este proyecto fue la explicación de la oferta de empresa con matices artísticos. Se resaltó el movimiento innovador , agregando toques de poesía, ilusión y la superposición de tono gris sobre fondo negro"
@@ -308,22 +308,45 @@ const [showContact, setShowContact] = useState(() => localStorage.getItem('showC
     return () => clearTimeout(t);
   }, [showMagno, showSparkle]);
 
-  // Avanzar diálogo y mostrar Contacto
   useEffect(() => {
-    if (!showMagno || showSparkle) return;
-    if (dialogStep < mensajes.length - 1) {
-
-      const t1 = setTimeout(() => setDialogStep(s => s + 1), 12000);
-      return () => clearTimeout(t1);
+    // Mostrar Magno cada 2h (o en la primera visita)
+    const last = localStorage.getItem('magnoLastSeen');
+    const now = Date.now();
+    if (!last || now - +last > 2 * 60 * 60 * 1000) {
+      setShowMagno(true);
+      setShowSparkle(true);
+      localStorage.setItem('magnoLastSeen', now.toString());
     }
-    if (dialogStep === mensajes.length - 1) {
-      setShowMagno(false);
-      setShowContact(true);
-localStorage.setItem('showContact', 'true'); // persistir estado
-      const t2 = setTimeout(() => setShowContact(true), 12000);
-      return () => clearTimeout(t2);
+  }, []);
+
+  useEffect(() => {
+    // Sparkle inicial → luego primer mensaje
+    if (!showMagno || !showSparkle) return;
+    const t = setTimeout(() => {
+      setShowSparkle(false);
+      setDialogStep(0);
+    }, 2000);
+    return () => clearTimeout(t);
+  }, [showMagno, showSparkle]);
+
+  useEffect(() => {
+    // Avanzar mensajes
+    if (!showMagno || showSparkle) return;
+
+    if (dialogStep < mensajes.length - 1) {
+      const t = setTimeout(() => setDialogStep(s => s + 1), 8000);
+      return () => clearTimeout(t);
+    } else {
+      // Último mensaje → Magno se va, aparece botón
+      const t = setTimeout(() => {
+        setShowMagno(false);   // Magno + carteles fuera
+        setShowContact(true);  // Solo queda el botón
+        localStorage.setItem('showContact', 'true');
+      }, 6000);
+      return () => clearTimeout(t);
     }
   }, [showMagno, showSparkle, dialogStep]);
+
 
   // Flip directora
   useEffect(() => {
@@ -362,68 +385,72 @@ localStorage.setItem('showContact', 'true'); // persistir estado
         {/* Banner */}
 
         <section style={{ ...bannerSectionStyle, backgroundColor: "white", backgroundImage: `url(${PinckBack})`, backgroundSize: "200% auto", backgroundPosition: "center", borderRadius: "15px" }}>
-        <div className="heroRow">
-  <img src={logo} alt="Logo" className="heroLogo heroLogo--left" />
+          <div className="heroRow">
+            <img src={logo} alt="Logo" className="heroLogo heroLogo--left" />
 
-  <div className="heroCopy">
-    <h1 className="heroTitle">Bienvenidos al Portafolio profesional de</h1>
-    <strong className="heroName">
-      Ana Massiel
-      <span className="heroSurname"> García Navarro</span>
-    </strong>
-  </div>
+            <div className="heroCopy">
+              <h1 className="heroTitle">Bienvenidos al Portafolio profesional de</h1>
+              <strong className="heroName">
+                Ana Massiel
+                <span className="heroSurname"> García Navarro</span>
+              </strong>
+            </div>
 
-  <img src={logo} alt="Logo" className="heroLogo heroLogo--right" />
-</div>
+            <img src={logo} alt="Logo" className="heroLogo heroLogo--right" />
+          </div>
 
-          <p style={{ fontSize: "1.5rem", bannerTextStyle, borderRadius: "15px",fontStyle:"italic",marginTop:0 ,color:"#d7d7d7"}}>Full Stack Developer, Diseñadora y Escritora</p>
+          <p style={{ fontSize: "1.5rem", bannerTextStyle, borderRadius: "15px", fontStyle: "italic", marginTop: 0, color: "#d7d7d7" }}>Full Stack Developer, Diseñadora y Escritora</p>
 
         </section>
-        <div style={{width:"100%", backgroundColor:"black",paddingTop:"3rem",paddingBottom:"3rem"}}>
+        <div style={{ width: "100%", backgroundColor: "black", paddingTop: "3rem", paddingBottom: "3rem" }}>
 
           <p>
             <Circles />
           </p>
-          <p style={{ fontSize: "2.2rem", bannerTextStyle, padding: "2rem", borderRadius: "15px",fontStyle:"italic",color:"#ffcfcf" }}>Soy amante de la creación en todas sus formas. Me inspira el desarrollo creativo.</p>
-{/* Quiénes Somos */}
-<AnimatedRings />
+          <p style={{ fontSize: "2.2rem", bannerTextStyle, padding: "2rem", borderRadius: "15px", fontStyle: "italic", color: "#ffcfcf",marginBottom:"7rem" }}>Soy amante de la creación en todas sus formas. Me inspira el desarrollo creativo.</p>
+          {/* Quiénes Somos */}<div>
+
+            <AnimatedRings style={{ marginBottom: "0" }} />
+
+          </div>
+
         </div>
-        <div style={{display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",maxWidth:"1200px",margin:"auto",padding:"2rem",fontStyle:"italic"}}>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", maxWidth: "1200px", margin: "auto", padding: "2rem", fontStyle: "italic" }}>
 
 
-        <div style={{fontStyle:"italic", fontSize:"1.4rem", lineHeight:"1.9", marginTop:"1rem", color:"grey"}}>
-  <h2
-    id="quienes-title"
-    className="title-glow"
-    style={{marginTop:"2rem",fontSize:"3.2rem",fontStyle:"italic",textAlign:"center",color:"black"}}
-  >
-    Presentación
-  </h2>
+          <div style={{ fontStyle: "italic", fontSize: "1.4rem", lineHeight: "1.9", marginTop: "1rem", color: "grey" }}>
+            <h2
+              id="quienes-title"
+              className="title-glow"
+              style={{ marginTop: "2rem", fontSize: "3.2rem", fontStyle: "italic", textAlign: "center", color: "black" }}
+            >
+              Presentación
+            </h2>
 
-  <p
-    className="hover-card"
-    style={{maxWidth:"900px",margin:"0",backgroundColor:"black",padding:"1.9rem 2rem"}}
-  >
-    Comencé mi viaje dentro de la programación como parte de mi establecimiento en Málaga, en 2023.
-  </p>
+            <p
+              className="hover-card"
+              style={{ maxWidth: "900px", margin: "0", backgroundColor: "black", padding: "1.9rem 2rem" }}
+            >
+              Comencé mi viaje dentro de la programación como parte de mi establecimiento en Málaga, en 2023.
+            </p>
 
-  <p
-    className="hover-card"
-    style={{maxWidth:"900px",margin:"0",backgroundColor:"#0c0c0c",padding:"1rem 2rem"}}
-  >
-    Me parece fascinante la posibilidad que tengo, como programadora, a través del código y el diseño web, de crear formas de arte complejas. Poder expresarme en colores y movimientos que dirijan el proceso creativo me hace querer esforzarme en la búsqueda continua de nuevas formas de llegar al cliente, haciendo que se sienta todo el tiempo acompañado, respaldado y entretenido con el recorrido por las vistas de cada proyecto; porque creo que un espacio virtual en línea debe brillar tanto como mi hambre de innovación continua.
-  </p>
+            <p
+              className="hover-card"
+              style={{ maxWidth: "900px", margin: "0", backgroundColor: "#0c0c0c", padding: "1rem 2rem" }}
+            >
+              Me parece fascinante la posibilidad que tengo, como programadora, a través del código y el diseño web, de crear formas de arte complejas. Poder expresarme en colores y movimientos que dirijan el proceso creativo me hace querer esforzarme en la búsqueda continua de nuevas formas de llegar al cliente, haciendo que se sienta todo el tiempo acompañado, respaldado y entretenido con el recorrido por las vistas de cada proyecto; porque creo que un espacio virtual en línea debe brillar tanto como mi hambre de innovación continua.
+            </p>
 
-  <p
-    className="hover-card hover-card--light"
-    style={{maxWidth:"900px",margin:"0",backgroundColor:"white",padding:"1.9rem 2rem"}}
-  >
-    Busco tener la oportunidad de seguir estudiando con precisión las necesidades únicas de cada cliente, para luego transformarlas en sitios web que no solo cumplen objetivos, sino que también inspiren y cautiven y que en cada obra se combine tecnología, diseño y pasión.
-  </p>
-</div>
+            <p
+              className="hover-card hover-card--light"
+              style={{ maxWidth: "900px", margin: "0", backgroundColor: "white", padding: "1.9rem 2rem" }}
+            >
+              Busco tener la oportunidad de seguir estudiando con precisión las necesidades únicas de cada cliente, para luego transformarlas en sitios web que no solo cumplen objetivos, sino que también inspiren y cautiven y que en cada obra se combine tecnología, diseño y pasión.
+            </p>
+          </div>
 
-  </div>
-          <section
+        </div>
+        <section
           aria-labelledby="quienes-title"
 
         >
@@ -439,56 +466,56 @@ localStorage.setItem('showContact', 'true'); // persistir estado
           </div>
         </section>
         <div
-  className="splash-section"
-  style={{
-    display: "flex",
-    justifyContent: "center",
-    color: "white",
-    backgroundImage: `url(${BlackBack})`,
-    backgroundSize: "200% auto",
-    backgroundPosition: "center",
-    borderRadius: "15px",
-  }}
->
-<div style={{display:"flex",flexDirection:"column",marginTop:"5rem"}}>
-<h2 style={{fontSize: "3rem", bannerTitleStyle,marginLeft:"3rem"}}>Principales Lenguajes & Frameworks & Herramientas</h2>
-  <div className="splash-grid">
+          className="splash-section"
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            color: "white",
+            backgroundImage: `url(${BlackBack})`,
+            backgroundSize: "200% auto",
+            backgroundPosition: "center",
+            borderRadius: "15px",
+          }}
+        >
+          <div style={{ display: "flex", flexDirection: "column", marginTop: "5rem" }}>
+            <h2 style={{ fontSize: "3rem", bannerTitleStyle, marginLeft: "3rem" }}>Principales Lenguajes & Frameworks & Herramientas</h2>
+            <div className="splash-grid">
 
-    <figure className="splash" style={{ "--delay": "0s", "--orbit": "18s" }}>
-      <img className="splash-img" src={Pink} alt="Salpicadura rosa 1" />
-      <figcaption><p className="splash-caption">React</p></figcaption>
-    </figure>
-    <figure className="splash" style={{ "--delay": ".24s", "--orbit": "22s" }}>
-      <img className="splash-img" src={Pink} alt="Salpicadura rosa 3" />
-      <figcaption><p className="splash-caption">CSS</p></figcaption>
-    </figure>
-    <figure className="splash" style={{ "--delay": ".12s", "--orbit": "20s" }}>
-      <img className="splash-img" src={Pink} alt="Salpicadura rosa 2" />
-      <figcaption><p className="splash-caption">Node</p></figcaption>
-    </figure>
+              <figure className="splash" style={{ "--delay": "0s", "--orbit": "18s" }}>
+                <img className="splash-img" src={Pink} alt="Salpicadura rosa 1" />
+                <figcaption><p className="splash-caption">React</p></figcaption>
+              </figure>
+              <figure className="splash" style={{ "--delay": ".24s", "--orbit": "22s" }}>
+                <img className="splash-img" src={Pink} alt="Salpicadura rosa 3" />
+                <figcaption><p className="splash-caption">CSS</p></figcaption>
+              </figure>
+              <figure className="splash" style={{ "--delay": ".12s", "--orbit": "20s" }}>
+                <img className="splash-img" src={Pink} alt="Salpicadura rosa 2" />
+                <figcaption><p className="splash-caption">Node</p></figcaption>
+              </figure>
 
-    <figure className="splash" style={{ "--delay": ".24s", "--orbit": "22s" }}>
-      <img className="splash-img" src={Pink} alt="Salpicadura rosa 3" />
-      <figcaption><p className="splash-caption">API RESTful</p></figcaption>
-    </figure>
-    <figure className="splash" style={{ "--delay": ".24s", "--orbit": "22s" }}>
-      <img className="splash-img" src={Pink} alt="Salpicadura rosa 3" />
-      <figcaption><p className="splash-caption">Flutter</p></figcaption>
-    </figure>
-    <figure className="splash" style={{ "--delay": ".24s", "--orbit": "22s" }}>
-      <img className="splash-img" src={Pink} alt="Salpicadura rosa 3" />
-      <figcaption><p className="splash-caption">FRAMER MOTION</p></figcaption>
-    </figure>
-    <figure className="splash" style={{ "--delay": ".24s", "--orbit": "22s" }}>
-      <img className="splash-img" src={Pink} alt="Salpicadura rosa 3" />
-      <figcaption><p className="splash-caption">Canva</p></figcaption>
-    </figure>
-  </div>
-</div>
-</div>
-<h2 className="portfolioIntroTitle">
-  He reunido ejemplos de mis trabajos: logos, pósters y una aplicación web representativa
-</h2>
+              <figure className="splash" style={{ "--delay": ".24s", "--orbit": "22s" }}>
+                <img className="splash-img" src={Pink} alt="Salpicadura rosa 3" />
+                <figcaption><p className="splash-caption">API RESTful</p></figcaption>
+              </figure>
+              <figure className="splash" style={{ "--delay": ".24s", "--orbit": "22s" }}>
+                <img className="splash-img" src={Pink} alt="Salpicadura rosa 3" />
+                <figcaption><p className="splash-caption">Flutter</p></figcaption>
+              </figure>
+              <figure className="splash" style={{ "--delay": ".24s", "--orbit": "22s" }}>
+                <img className="splash-img" src={Pink} alt="Salpicadura rosa 3" />
+                <figcaption><p className="splash-caption">FRAMER MOTION</p></figcaption>
+              </figure>
+              <figure className="splash" style={{ "--delay": ".24s", "--orbit": "22s" }}>
+                <img className="splash-img" src={Pink} alt="Salpicadura rosa 3" />
+                <figcaption><p className="splash-caption">Canva</p></figcaption>
+              </figure>
+            </div>
+          </div>
+        </div>
+        <h2 className="portfolioIntroTitle">
+          He reunido ejemplos de mis trabajos: logos, pósters y una aplicación web representativa
+        </h2>
         <div style={{ maxWidth: "1200px", margin: "auto", marginTop: "10rem", padding: "2rem" }}>
           <h2 className='seleccione'>Algunos logos destacados</h2>
 
@@ -515,36 +542,36 @@ localStorage.setItem('showContact', 'true'); // persistir estado
         </div>
 
         <div style={{ maxWidth: "1200px", margin: "auto", padding: "2rem" }}>
-  <h2 className="seleccione">Algunos pósters destacados</h2>
+          <h2 className="seleccione">Algunos pósters destacados</h2>
 
-  {/* SOLO PÓSTERS */}
-  <div className="masonry masonry--posters">
-    {[img4, img5].map((src, i) => {
-      const logosCount = 3;              // índices 0,1,2 ya los ocupan los logos
-      const fraseIndex = logosCount + i; // pósters: 3,4
-      return (
-        <button
-          key={fraseIndex}
-          className="masonry__item"
-          onClick={() => setActive(fraseIndex)}
-          aria-label={`Abrir frase ${fraseIndex + 1}`}
-        >
-          <img
-            src={src}
-            alt={`Póster ${i + 1}`}
-            className="masonry__img"
-            data-fit="contain"           // que se vea completo
-            loading="lazy"
-          />
-        </button>
-      );
-    })}
-  </div>
+          {/* SOLO PÓSTERS */}
+          <div className="masonry masonry--posters">
+            {[img4, img5].map((src, i) => {
+              const logosCount = 3;              // índices 0,1,2 ya los ocupan los logos
+              const fraseIndex = logosCount + i; // pósters: 3,4
+              return (
+                <button
+                  key={fraseIndex}
+                  className="masonry__item"
+                  onClick={() => setActive(fraseIndex)}
+                  aria-label={`Abrir frase ${fraseIndex + 1}`}
+                >
+                  <img
+                    src={src}
+                    alt={`Póster ${i + 1}`}
+                    className="masonry__img"
+                    data-fit="contain"           // que se vea completo
+                    loading="lazy"
+                  />
+                </button>
+              );
+            })}
+          </div>
 
-  <p style={{ fontSize: "21px", textAlign: "center", marginBottom: "4rem", color: "black" }}>
-    Al tocar sobre el póster encontrará una breve descripción sobre el concepto clave que se pretendía alcanzar.
-  </p>
-</div>
+          <p style={{ fontSize: "21px", textAlign: "center", marginBottom: "4rem", color: "black" }}>
+            Al tocar sobre el póster encontrará una breve descripción sobre el concepto clave que se pretendía alcanzar.
+          </p>
+        </div>
 
         {active !== null && (
           <div className="modal-overlay" onClick={() => setActive(null)}>
@@ -560,32 +587,38 @@ localStorage.setItem('showContact', 'true'); // persistir estado
             </div>
           </div>
         )}
-<section>
-  <div style={{ maxWidth: "1200px", margin: "auto", padding: "2rem", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
-    <h2 className="seleccione" style={{ marginTop: "5rem" }}>Aplicación web Nomad-coliving</h2>
+        <section>
+          <div style={{ maxWidth: "1200px", margin: "auto", padding: "2rem", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+            <h2 className="seleccione" style={{ marginTop: "5rem" }}>Aplicación web Nomad-coliving</h2>
 
-    <a
-      href="https://ejemplo.com/nomad-coliving"
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="Abrir sitio Nomad-coliving (se abre en una nueva pestaña)"
-      className="nomad-card"
-      style={{ maxWidth: "600px", width: "100%" }}
-    >
-      <img
-        src={Nomad}        /* o {img3} */
-        alt="Vista previa del sitio Nomad-coliving"
-        loading="lazy"
-        className="nomad-img"
-      />
-    </a>
+            <a
+              href="https://nomad-house.vercel.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Abrir sitio Nomad-coliving (se abre en una nueva pestaña)"
+              className="nomad-card"
+              style={{ maxWidth: "600px", width: "100%" }}
+            >
+              <img
+                src={Nomad}        /* o {img3} */
+                alt="Vista previa del sitio Nomad-coliving"
+                loading="lazy"
+                className="nomad-img"
+              />
+            </a>
 
-    <p style={{ textAlign: "center", marginTop: ".5rem", color: "black", fontStyle: "italic", padding: "1rem" }}>
-      Haz clic en la imagen para ver el sitio (demo)
-    </p>
+            <div style={{ textAlign: "center", marginTop: ".5rem", color: "black", maxWidth: "600px" }}>
+              <p style={{ fontStyle: "italic", margin: "0.5rem 0", color: "#7f8081" }}>
+                He creado una web representativa de mi trabajo. El proyecto trata sobre una aplicación web de gestión de apartamentos turísticos, con una lógica central que acompaña al cliente desde la exploración de las casas de alquiler hasta la reserva del apartamento turístico.
+              </p>
+              <p style={{ fontStyle: "italic", margin: "0.25rem 0" }}>
+                Haz clic en la imagen para ver el sitio (demo)
+              </p>
+            </div>
 
-    {/* Estilos de animación */}
-    <style>{`
+
+            {/* Estilos de animación */}
+            <style>{`
       @keyframes nomad-float {
         0%,100% { transform: translateY(0); }
         50%     { transform: translateY(-6px); }
@@ -641,11 +674,11 @@ localStorage.setItem('showContact', 'true'); // persistir estado
         .nomad-img, .nomad-card, .nomad-card::after { transition: none; }
       }
     `}</style>
-  </div>
-</section>
+          </div>
+        </section>
 
         <section style={directorSectionStyle}>
-        <h2 style={{ bannerTitleStyle,color:"grey",fontSize:"2.3rem", marginBottom:"5rem"}}>Tarjeta de presentación</h2>
+          <h2 style={{ bannerTitleStyle, color: "grey", fontSize: "2.3rem", marginBottom: "5rem" }}>Tarjeta de presentación</h2>
           <div style={flipContainerStyle}>
             <div
               style={{
@@ -662,67 +695,66 @@ localStorage.setItem('showContact', 'true'); // persistir estado
                 <BusinessCard />
               </div>
               <h3 className="rightsNote rightsNote--onDark">
-  Los trabajos expuestos forman parte de mi portafolio profesional, con todos mis derechos reservados.
-</h3>
+                Los trabajos expuestos forman parte de mi portafolio profesional, con todos mis derechos reservados.
+              </h3>
             </div>
           </div>
-<div style={{marginTop:"  10rem"}}>
+          <div style={{ marginTop: "  10rem" }}>
 
-          <p style={directorTitleStyle}>
-            Si ha llegado hasta aquí<br />
-           Le agradezco su tiempo.<br />
-           Usted ha visitado mi primer portafolio profesional.<br />
-          </p>
-          <h3 style={directorNameStyle}>Fin.</h3>
-</div>
+            <p style={directorTitleStyle}>
+              Si ha llegado hasta aquí<br />
+              Le agradezco su tiempo.<br />
+              Usted ha visitado mi primer portafolio profesional.<br />
+            </p>
+            <h3 style={directorNameStyle}>Fin.</h3>
+          </div>
 
         </section>
         {/* Aros animados */}
-{/* === MAGNO (asistente) === */}
-{/* === MAGNO (asistente) === */}
-{/* === MAGNO (asistente) === */}
-{showMagno && (
-  <aside style={magnoContainerStyle} aria-live="polite">
-    {showSparkle ? (
-      <img
-        src={magno}
-        alt="Magno saludando"
-        style={{ ...catImageStyle, animation: 'sparkle 1.6s ease-in-out infinite' }}
-      />
-    ) : (
-      <>
-        <div style={dialogStyle}>
-          <p style={{ margin: 0 }}>{mensajes[dialogStep]}</p>
-        </div>
+        {/* === MAGNO (asistente) === */}
+        {/* === MAGNO (asistente) === */}
+        {/* === MAGNO (asistente) === */}
+        {/* === MAGNO (asistente) === */}
+        {showMagno && (
+          <aside style={magnoContainerStyle} role="dialog" aria-live="polite">
+            {showSparkle ? (
+              <img
+                src={magno}
+                alt="Magno saludando"
+                style={{ ...catImageStyle, animation: 'sparkle 1.6s ease-in-out infinite' }}
+              />
+            ) : (
+              <>
+                <div style={dialogStyle}>
+                  <p style={{ margin: 0 }}>{mensajes[dialogStep]}</p>
+                </div>
+                <img
+                  src={magno}
+                  alt="Magno"
+                  style={{ ...catImageStyle, animation: 'float 4s ease-in-out infinite' }}
+                />
+              </>
+            )}
+          </aside>
+        )}
 
-        <img
-          src={magno}
-          alt="Magno"
-          style={{ ...catImageStyle, animation: 'float 4s ease-in-out infinite' }}
-        />
-      </>
-    )}
-  </aside>
-)}
-
-{/* Botón de contacto — ya no depende de showMagno */}
-{showContact && (
-  <aside style={{ ...magnoContainerStyle, zIndex: 2000 }} aria-hidden="false">
-    <Link to="/contacto" style={{ ...contactButtonStyle, textAlign: 'center' }}>
-      Contáctanos
-    </Link>
-  </aside>
-)}
-
+        {/* === Botón de contacto (solo cuando Magno se fue) === */}
+        {showContact && !showMagno && (
+          <aside style={{ ...magnoContainerStyle, zIndex: 2000 }}>
+            <Link to="/contacto" style={{ ...contactButtonStyle, textAlign: 'center' }}>
+              Contáctanos
+            </Link>
+          </aside>
+        )}
 
         <footer className="site-footer" role="contentinfo">
-      <div className="site-footer__divider" aria-hidden="true" />
-      <div className="site-footer__inner">
-        <p className="site-footer__copy" style={{fontStyle:"italic", color:"grey",fontSize:"0.9rem"}}>
-          © {year} <span style={{fontWeight:"700 !IMPORTANT",fontSize:"23px" ,color:"grey"}}>@Contrahazt_code</span>. Todos los derechos reservados.
-        </p>
-      </div>
-    </footer>
+          <div className="site-footer__divider" aria-hidden="true" />
+          <div className="site-footer__inner">
+            <p className="site-footer__copy" style={{ fontStyle: "italic", color: "grey", fontSize: "0.9rem" }}>
+              © {year} <span style={{ fontWeight: "700 !IMPORTANT", fontSize: "23px", color: "grey" }}>@Contrahazt_code</span>. Todos los derechos reservados.
+            </p>
+          </div>
+        </footer>
 
       </div>
     </div>

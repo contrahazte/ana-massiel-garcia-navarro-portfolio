@@ -8,6 +8,7 @@ import mesaImg from '../assets/mesa.png';
 const ContactForm = () => {
   const [form, setForm] = useState({ name: '', email: '', service: '', customService: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -16,17 +17,21 @@ const ContactForm = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setForm({ name: '', email: '', service: '', customService: '', message: '' });
-    }, 7000);
-  };
 
-  const handleWhatsappClick = () => {
     const serviceText = form.service === 'custom' ? form.customService : form.service;
     const msg = `Hola, soy ${form.name}. Me interesa el servicio: ${serviceText}. Mi mensaje: ${form.message}`;
+
+    // Enviar a WhatsApp (pon aquí tu número correcto)
     window.open(`https://wa.me/34607989729?text=${encodeURIComponent(msg)}`, '_blank');
+
+    // Mostrar modal de confirmación
+    setShowModal(true);
+
+    // Resetear formulario después de unos segundos
+    setTimeout(() => {
+      setShowModal(false);
+      setForm({ name: '', email: '', service: '', customService: '', message: '' });
+    }, 7000);
   };
 
   return (
@@ -36,21 +41,12 @@ const ContactForm = () => {
         <Spine />
         <PageForm>
           <FormCard>
-            <Header>Contáctanos</Header>
-            <Subheader>Déjanos tu mensaje o escríbenos por WhatsApp</Subheader>
+            <Header>Contáctame</Header>
+            <Subheader>Escríbeme por WhatsApp</Subheader>
 
-            {submitted && (
-              <ThankYou>
-                <h3>¡Gracias por tu mensaje!</h3>
-                <p>Te contactaremos pronto.</p>
-              </ThankYou>
-            )}
 
             <Form onSubmit={handleSubmit}>
-              <Row>
-                <Input name="name" placeholder="Tu nombre" value={form.name} onChange={handleChange} required />
-                <Input type="email" name="email" placeholder="Tu correo electrónico" value={form.email} onChange={handleChange} required />
-              </Row>
+
 
               {/* <Select name="service" value={form.service} onChange={handleChange} required>
                 <option value="">Selecciona un servicio</option>
@@ -63,17 +59,30 @@ const ContactForm = () => {
 
               {form.service === 'custom' && <Input name="customService" placeholder="Describe tu necesidad" value={form.customService} onChange={handleChange} required />}
 
-              <Textarea name="message" placeholder="Cuéntanos más sobre tu proyecto..." value={form.message} onChange={handleChange} rows={5} />
 
               <Buttons>
-                <Submit type="submit">Enviar</Submit>
-                <Whatsapp type="button" onClick={handleWhatsappClick}><FaWhatsapp size={18} /> WhatsApp</Whatsapp>
+                <Whatsapp type="button" onClick={handleSubmit}>
+                  <FaWhatsapp size={18} /> WhatsApp
+                </Whatsapp>
               </Buttons>
             </Form>
           </FormCard>
         </PageForm>
         <Bookmark />
       </Book>
+
+      {/* Modal de confirmación */}
+      {showModal && (
+        <ModalOverlay>
+          <ModalContent>
+            <h3>¡Me hace feliz saber que enviaste un mensaje! 💌</h3>
+            <p>
+              Responderé a estos datos de contacto apenas reciba la solicitud.
+              Tenga un maravilloso día 🌸
+            </p>
+          </ModalContent>
+        </ModalOverlay>
+      )}
     </Wrapper>
   );
 };
@@ -107,8 +116,9 @@ const Book = styled.div`
   flex-direction: row;
   background: #6f1e51;
   width: 80vw;
-  max-width: 800px;
+  max-width: 1200px;
   max-height: 80vh;
+  height:70%;
 transform: scale(1);
   box-shadow:
     0 20px 40px rgba(0, 0, 0, 0.7),
@@ -170,12 +180,24 @@ const PageForm = styled.div`
 `;
 
 const FormCard = styled.div`
-  width: 100%;
-  max-width: 650px;
-  background: #1f1f1f;
-  border-radius: 12px;
-  box-shadow: 0 0 12px rgba(155,89,182,0.3);
-  color: #eee;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 650px;
+    background: #1f1f1f;
+    height: 80%;
+    justify-content: center;
+    border-radius
+Defines the radii of the outer border edge.
+
+Disponible en la mayoría de los navegadores principales (Baseline desde enero de 2018)
+Más información
+
+No mostrar
+: 12px;
+    box-shadow: 0 0 12px rgba(155, 89, 182, 0.3);
+    color: #eee;
+
 `;
 
 const Header = styled.h2`

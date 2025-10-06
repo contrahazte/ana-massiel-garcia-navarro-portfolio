@@ -1001,6 +1001,21 @@ object-fit: contain;
   box-shadow: 0 10px 24px rgba(0,0,0,.14);
   filter: drop-shadow(0 0 16px rgba(224,32,151,.12));
 }
+.proyecto-container {
+  text-align: center;
+  margin-top: 0.5rem;
+  color: black;
+}
+
+.texto {
+  font-style: italic;
+  padding: 1rem;
+  margin: 0;
+}
+
+.texto + .texto {
+  margin-top: 0.5rem; /* solo los siguientes párrafos */
+}
 
 /* (Opcional) micro-temblor elegante: añade la clase "hover-jitter" además de hover-card */
 @keyframes jitter {

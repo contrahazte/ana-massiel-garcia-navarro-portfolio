@@ -270,7 +270,7 @@ const AnimatedRings = () => {
 
       {/* Contenedor principal: 60% de ancho, fondo blanco + borde gris, con background DJ */}
 
-      <section style={{ ...styles.container, margin: "6rem auto", border: '10px solid black', }}>
+      <section style={{ ...styles.container, margin: "6rem auto",marginTop:"0", border: '10px solid black', }}>
 
   {/* ✅ NUEVO: Intro antes de la animación */}
 

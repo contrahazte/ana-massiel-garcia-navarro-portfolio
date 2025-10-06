@@ -24,7 +24,7 @@ export default function Navbar() {
 
   const links = [
     { name: 'Portafolio', path: '/' },
-    // { name: 'Conócenos', path: '/conocenos' },
+    { name: 'Conócenos', path: '/conocenos' },
     {
       name: 'Curriculum',
       component: <CurriculumModalLink src={Curriculum} label="Curriculum" />

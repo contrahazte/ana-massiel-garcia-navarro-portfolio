@@ -128,8 +128,8 @@ const Toast = styled.div`
   transition: opacity 0.3s;
 `;
 
-export default function BusinessCard() {
-  const phone = '607989729';
+export default function BusinessCard({ showFooter = false }) {  // 👈 nueva prop
+  const phone = '+34 607 98 97 29';
   const email = 'contrahazte@gmial.com';
   const [toastMsg, setToastMsg] = useState('');
   const [toastVis, setToastVis] = useState(false);
@@ -152,8 +152,8 @@ export default function BusinessCard() {
       <Header>
         <LogoImg src={logo} alt="Neoncode Logo" />
         <div style={{display:"flex",flexDirection:"row",alignItems:"center",justifyContent:"center"}}>
-        <Title>Contrahazt_</Title>
-        <Title style={{fontStyle:"italic",color:"rgb(207, 203, 203)"}}>code</Title>
+          <Title>Contrahazt_</Title>
+          <Title style={{fontStyle:"italic",color:"rgb(207, 203, 203)"}}>code</Title>
         </div>
 
         <Subtitle>Desarrollo de páginas web artísticas</Subtitle>
@@ -165,7 +165,7 @@ export default function BusinessCard() {
           {phone}
         </InfoItem>
 
-        <InfoItem onClick={() => copyToClipboard(email)} as="button">
+        <InfoItem onClick={() => copyToClipboard(email)}>
           <FaEnvelope size={18} />
           {email}
         </InfoItem>
@@ -177,6 +177,9 @@ export default function BusinessCard() {
       </Info>
 
       <Toast visible={toastVis}>{toastMsg}</Toast>
+
+      {/* 👇 solo se muestra si showFooter es true */}
+      {showFooter && <h2>I am always available for work</h2>}
     </Card>
   );
 }
