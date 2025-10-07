@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
-import { Layout } from './layout.jsx';
+import { Layout } from './Layout.jsx';
 import Home from './screens/Home';
 import Conocenos from './screens/Conocenos';
 import ContactForm from './screens/ContactForm'; // 👈 nuevo import
