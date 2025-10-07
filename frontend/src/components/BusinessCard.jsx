@@ -156,7 +156,7 @@ export default function BusinessCard({ showFooter = false }) {  // 👈 nueva pr
           <Title style={{fontStyle:"italic",color:"rgb(207, 203, 203)"}}>code</Title>
         </div>
 
-        <Subtitle>Desarrollo de páginas web artísticas</Subtitle>
+        <Subtitle>Desarrollo de aplicaciones web artísticas</Subtitle>
       </Header>
 
       <Info>
