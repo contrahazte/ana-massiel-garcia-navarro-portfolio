@@ -1,7 +1,6 @@
 
 
 
-
 /* Keyframes */
 @keyframes fly {
   0% { transform: translate(-50px, 0) rotate(0deg); opacity: 0; }
