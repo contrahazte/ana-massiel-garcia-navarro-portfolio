@@ -406,7 +406,7 @@ const AnimatedRings = () => {
 const styles = {
   container: {
     // ⬇️ NUEVO: 60% del ancho, centrado, fondo blanco y borde gris de 10px
-    width: '60%',
+    width: '90%',
     margin: '0 auto',
     backgroundColor: '#fff',
     backgroundImage: `linear-gradient(rgba(255,255,255,0.88), rgba(255,255,255,0.88)), url(${djBg})`,

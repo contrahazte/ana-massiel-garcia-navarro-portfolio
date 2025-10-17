@@ -25,6 +25,7 @@ import BlackBack from "../assets/black-back.png";
 import Nomad from "../assets/nomadHouses.jpg";
 import PinckBack from "../assets/pinkBack.png";
 import Contrahazt_code from "../assets/contrahazt_ code.png";
+import Contrahazt_code_Tarjet from "../assets/contrahazt_code.jpg";
 // =============================
 //   SECCIÓN BOSQUE ENCANTADO
 // =============================
@@ -384,7 +385,7 @@ export default function Home() {
       <div style={{ backgroundColor: '#251d6b' }}>
         {/* Banner */}
 
-        <section style={{ ...bannerSectionStyle, backgroundColor: "white", backgroundImage: `url(${PinckBack})`, backgroundSize: "200% auto", backgroundPosition: "center", borderRadius: "15px" }}>
+        <section style={{ ...bannerSectionStyle, backgroundColor: "white", backgroundImage: `url(${PinckBack})`, backgroundSize: "200% auto", backgroundPosition: "center",padding:"0", borderRadius: "15px" }}>
           <div className="heroRow">
             <img src={logo} alt="Logo" className="heroLogo heroLogo--left" />
 
@@ -592,7 +593,7 @@ export default function Home() {
             <h2 className="seleccione" style={{ marginTop: "5rem" }}>Aplicación web Nomad-coliving</h2>
 
             <a
-              href="https://nomad-house.vercel.app"
+              href="http://localhost:5174/"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Abrir sitio Nomad-coliving (se abre en una nueva pestaña)"
@@ -678,38 +679,85 @@ export default function Home() {
         </section>
 
         <section style={directorSectionStyle}>
-          <h2 style={{ bannerTitleStyle, color: "grey", fontSize: "2.3rem", marginBottom: "5rem" }}>Tarjeta de presentación</h2>
-          <div style={flipContainerStyle}>
-            <div
-              style={{
-                ...flipInnerStyle,
-                transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)'
-              }}
-            >
-              <img src={Contrahazt_code} alt="Directora" style={frontImageStyle} />
-              {/* <img src={desarrollo} alt="Directora" style={frontImageStyle} /> */}
+  <h2
+    style={{
+      ...bannerTitleStyle,
+      color: "grey",
+      textAlign:"center",
+      fontSize: "2.3rem",
+      marginBottom: "5rem",
+    }}
+  >
+    Tarjetas de presentación
+  </h2>
 
-              {/* Back face: reemplazamos el logo por la tarjeta */}
-              <div style={{ ...backImageStyle, background: 'transparent', boxShadow: 'none' }}>
+  {/* Primera tarjeta con flip (BusinessCard) */}
+  <div style={flipContainerStyle}>
+    <div
+      style={{
+        ...flipInnerStyle,
+        transform: isFlipped ? "rotateY(180deg)" : "rotateY(0deg)",
+      }}
+    >
+      {/* Cara frontal */}
+      <img src={Contrahazt_code} alt="Directora" style={frontImageStyle} />
 
-                <BusinessCard />
-              </div>
-              <h3 className="rightsNote rightsNote--onDark">
-                Los trabajos expuestos forman parte de mi portafolio profesional, con todos mis derechos reservados.
-              </h3>
-            </div>
-          </div>
-          <div style={{ marginTop: "  10rem" }}>
+      {/* Cara trasera */}
+      <div
+        style={{
+          ...backImageStyle,
+          background: "transparent",
+          boxShadow: "none",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: "1.5rem",
 
-            <p style={directorTitleStyle}>
-              Si ha llegado hasta aquí<br />
-              Le agradezco su tiempo.<br />
-              Usted ha visitado mi primer portafolio profesional.<br />
-            </p>
-            <h3 style={directorNameStyle}>Fin.</h3>
-          </div>
+          width: "100%",
+          height: "100%",
+          backfaceVisibility: "hidden",
+          transform: "rotateY(180deg)",
+        }}
+      >
+        <BusinessCard />
+      </div>
+    </div>
+  </div>
 
-        </section>
+  {/* Segunda tarjeta (imagen estática debajo) */}
+  <div
+    style={{
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      gap: "1.5rem",
+      marginTop: "6rem",
+    }}
+  >
+    <img
+      src={Contrahazt_code_Tarjet}
+      alt="Tarjeta adicional Contrahazt"
+      style={{
+        width: "100%",
+        maxWidth: "800px",
+        height: "auto",
+        borderRadius: "10px",
+      }}
+    />
+  </div>
+
+  {/* Texto final */}
+  <div style={{ marginTop: "10rem" }}>
+    <p style={directorTitleStyle}>
+      Si ha llegado hasta aquí<br />
+      Le agradezco su tiempo.<br />
+      Usted ha visitado mi primer portafolio profesional.<br />
+    </p>
+    <h3 style={directorNameStyle}>Fin.</h3>
+  </div>
+</section>
+
         {/* Aros animados */}
         {/* === MAGNO (asistente) === */}
         {/* === MAGNO (asistente) === */}
