@@ -1033,4 +1033,5 @@ object-fit: contain;
 /* Respeto a usuarios con reducción de movimiento */
 @media (prefers-reduced-motion: reduce){
   .title-glow, .hover-card{ transition: none; }
+
 }
